@@ -3,6 +3,7 @@ package com.example.news.ui.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.example.news.R
 import com.example.news.data.model.news.ArticleItem
 import com.example.news.data.model.news.NewsModel
@@ -31,6 +32,10 @@ class MainActivity : AppCompatActivity(), MainContract.View, RecyclerviewListene
 
     private fun getBusinessNews(){
         presenter?.getBusinessNews()
+
+        presenter?.postsLiveData?.observe(this, Observer {
+            adapter.submitList(it)
+        })
     }
 
     //        presenter?.getSavedData()?.observe(this, androidx.lifecycle.Observer {
@@ -41,7 +46,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, RecyclerviewListene
 
     override fun fillView(result: NewsModel?) {
         runOnUiThread{
-            adapter?.update(result?.articles)
+//            adapter?.update(result?.articles)
          //   presenter?.itemClicks(result?.articles)
 
         }
