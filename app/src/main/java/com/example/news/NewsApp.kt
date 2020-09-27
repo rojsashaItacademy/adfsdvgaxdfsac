@@ -6,14 +6,14 @@ import com.example.news.data.local.AppDataBase
 
 class NewsApp : Application() {
 
-    private val db: AppDataBase? = null
+    private var db: AppDataBase? = null
 
     override fun onCreate() {
         super.onCreate()
 
         app = this
 
-        val db = Room.databaseBuilder(applicationContext, AppDataBase::class.java, DB_NAME)
+          db = Room.databaseBuilder(applicationContext, AppDataBase::class.java, DB_NAME)
             .allowMainThreadQueries()
             .build()
     }

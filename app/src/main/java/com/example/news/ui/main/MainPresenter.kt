@@ -10,14 +10,14 @@ import com.example.news.data.remote.RetrofitBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainPresenter : MainContract.Presenter, RecyclerviewListener {
+class MainPresenter : MainContract.Presenter  {
 
     private var view: MainContract.View? = null
 
     override fun getBusinessNews() {
         GlobalScope.launch {
             runCatching {
-                val result = RetrofitBuilder.getService()?.getNews("us", "business", API_KEY_NEWS)
+                val result = RetrofitBuilder.getService()?.getNews("us", "business", API_KEY_NEWS, 1, 1)
                 updateDB(result)
                 view?.fillView(result)
             }.onFailure {
@@ -41,10 +41,5 @@ class MainPresenter : MainContract.Presenter, RecyclerviewListener {
     override fun unbind() {
         this.view = null
     }
-
-    override fun itemClicks(item: ArticleItem) {
-
-    }
-
 
 }

@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class SourceModel (
     @PrimaryKey(autoGenerate = true)
-    val id: Int, //???
-    //val id : String, //?
+    val primaryId : Int, //?
+    val id: String?, //???
     val name : String
 )
