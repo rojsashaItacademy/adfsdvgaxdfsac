@@ -7,12 +7,13 @@ import androidx.room.PrimaryKey
 data class ArticleItem(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val author: String,
-    val title: String,
-    val description: String,
-    val url: String,
-    val urlToImage: String,
-    val publishedAt: String,
-    val content: String,
-    val source: SourceModel
+    val author: String?,
+    var page: Int = 0,
+    val title: String?,
+    val description: String?,
+    val url: String?,
+    val urlToImage: String?,
+    val publishedAt: String?,
+    val content: String?,
+    val source: SourceModel?
 )

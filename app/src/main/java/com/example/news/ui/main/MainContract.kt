@@ -12,7 +12,7 @@ interface MainContract {
 
     interface Presenter:LiveCycle<View>{
         fun getBusinessNews()
-        fun getSavedData(): LiveData<List<NewsModel>>?
+//        fun getSavedData(): LiveData<List<NewsModel>>?
 
     }
 }

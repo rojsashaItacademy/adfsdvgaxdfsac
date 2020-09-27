@@ -22,8 +22,8 @@ class MainPresenter : MainContract.Presenter  {
 
     init {
         val config = PagedList.Config.Builder()
-            .setPageSize(15)
-            .setInitialLoadSizeHint(30)
+            .setPageSize(10)
+            .setInitialLoadSizeHint(10)
             .setEnablePlaceholders(false)
             .build()
         postsLiveData = initializedPagedListBuilder(config).build()
@@ -53,13 +53,13 @@ class MainPresenter : MainContract.Presenter  {
 //        }
     }
 
-    override fun getSavedData(): LiveData<List<NewsModel>>? {
-        return NewsApp.getApp()?.getDb()?.getDao()?.getAll()
-    }
+//    override fun getSavedData(): LiveData<List<NewsModel>>? {
+//        return NewsApp.getApp()?.getDb()?.getDao()?.getAll()
+//    }
 
-    private fun updateDB(result: NewsModel?) {
-        result?.let { NewsApp.getApp()?.getDb()?.getDao()?.addForecast(it) }
-    }
+//    private fun updateDB(result: NewsModel?) {
+//        result?.let { NewsApp.getApp()?.getDb()?.getDao()?.addForecast(it) }
+//    }
 
     override fun bind(view: MainContract.View) {
         this.view = view

@@ -8,5 +8,5 @@ data class SourceModel (
     @PrimaryKey(autoGenerate = true)
     val primaryId : Int, //?
     val id: String?, //???
-    val name : String
+    val name : String?
 )

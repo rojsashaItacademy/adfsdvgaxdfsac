@@ -1,27 +1,25 @@
 package com.example.news.data.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
+import com.example.news.data.model.news.ArticleItem
 import com.example.news.data.model.news.NewsModel
 
 @Dao
 interface NewsDao {
 
-    @Insert
-    fun add(data:NewsModel)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun add1(data: List<ArticleItem>)
 
-    @Query("SELECT * FROM NewsModel")
-    fun getAll() : LiveData<List<NewsModel>>
+    @Query("SELECT * FROM ArticleItem WHERE page = :page")
+    fun getAll1(page: Int): List<ArticleItem>
 
-    @Query("DELETE FROM NewsModel")
-    fun deleteAll()
+    @Query("DELETE FROM ArticleItem")
+    fun deleteAll1()
 
     @Transaction
-    fun addForecast(data: NewsModel){
-        deleteAll()
-        add(data)
+    fun addForecast1(data: List<ArticleItem>) {
+        deleteAll1()
+//        add1(data)
     }
 }

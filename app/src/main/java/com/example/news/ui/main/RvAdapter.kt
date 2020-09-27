@@ -18,14 +18,6 @@ class RvAdapter(private val listener: RecyclerviewListener) :
         return RvHolder(view)
     }
 
-    fun update(list: List<ArticleItem>?) {
-//        if (list != null) {
-//            this.list.clear()
-//            this.list.addAll(list)
-//            notifyDataSetChanged()
-//        }
-    }
-
     override fun onBindViewHolder(holder: RvHolder, position: Int) {
         getItem(position)?.let { holder.bind(it, listener) }
     }
@@ -36,14 +28,10 @@ class RvHolder(view: View) : RecyclerView.ViewHolder(view) {
         articleItem: ArticleItem,
         listener: RecyclerviewListener
     ) {
-
         itemView.tvDesc.text = articleItem.author
-
         itemView.setOnClickListener {
             listener.itemClicks(articleItem)
         }
-
-
     }
 }
 

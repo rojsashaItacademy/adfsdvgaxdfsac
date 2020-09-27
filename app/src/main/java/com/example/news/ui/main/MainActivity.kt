@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), MainContract.View, RecyclerviewListener {
 
     private val adapter by lazy { RvAdapter(this) }
-    private var presenter:MainPresenter? = null
+    private var presenter: MainPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,42 +22,26 @@ class MainActivity : AppCompatActivity(), MainContract.View, RecyclerviewListene
         presenter?.bind(this)
         getBusinessNews()
         setupRecycler()
-
     }
-
 
     private fun setupRecycler() {
         recyclerView.adapter = adapter
     }
 
-    private fun getBusinessNews(){
-        presenter?.getBusinessNews()
-
+    private fun getBusinessNews() {
         presenter?.postsLiveData?.observe(this, Observer {
             adapter.submitList(it)
         })
     }
 
-    //        presenter?.getSavedData()?.observe(this, androidx.lifecycle.Observer {
-//            if (it.isNotEmpty()) {
-//                val item = it.first()
-//                adapter.update(item.daily)
-//            } })
+    override fun fillView(result: NewsModel?) {}
 
-    override fun fillView(result: NewsModel?) {
-        runOnUiThread{
-//            adapter?.update(result?.articles)
-         //   presenter?.itemClicks(result?.articles)
-
-        }
+    override fun itemClicks(item: ArticleItem) {
+        startActivity(Intent(this, NewsArticleActivity::class.java))
     }
 
     override fun onDestroy() {
         super.onDestroy()
         presenter?.unbind()
-    }
-
-    override fun itemClicks(item: ArticleItem) {
-        startActivity(Intent(this, NewsArticleActivity::class.java))
     }
 }
