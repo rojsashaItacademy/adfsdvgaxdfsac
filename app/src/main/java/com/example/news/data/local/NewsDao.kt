@@ -20,6 +20,6 @@ interface NewsDao {
     @Transaction
     fun addForecast1(data: List<ArticleItem>) {
         deleteAll1()
-//        add1(data)
+        add1(data)
     }
 }

@@ -24,7 +24,7 @@ class NewsDataSource : PageKeyedDataSource<Int, ArticleItem>() {
 
                 result?.articles?.map { it.page = 1 }
 
-                result?.articles?.let { NewsApp.getApp()?.getDb()?.getDao()?.add1(it) }
+                result?.articles?.let { NewsApp.getApp()?.getDb()?.getDao()?.addForecast1(it) }
                 val data = NewsApp.getApp()?.getDb()?.getDao()?.getAll1(1)
 
                 data?.let { callback.onResult(it, 1, 2) }
@@ -49,7 +49,7 @@ class NewsDataSource : PageKeyedDataSource<Int, ArticleItem>() {
                 data?.let { callback.onResult(it, params.key + 1) }
             }.onFailure {
                 val data = NewsApp.getApp()?.getDb()?.getDao()?.getAll1(params.key)
-                data?.let { callback.onResult(it, params.key) }
+                data?.let { callback.onResult(it, params.key + 1) }
             }
         }
     }

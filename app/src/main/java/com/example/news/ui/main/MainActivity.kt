@@ -22,6 +22,13 @@ class MainActivity : AppCompatActivity(), MainContract.View, RecyclerviewListene
         presenter?.bind(this)
         getBusinessNews()
         setupRecycler()
+        setupListeners()
+    }
+
+    private fun setupListeners() {
+        swipeRefresh.setOnRefreshListener {
+            presenter?.reset()
+        }
     }
 
     private fun setupRecycler() {
@@ -31,17 +38,22 @@ class MainActivity : AppCompatActivity(), MainContract.View, RecyclerviewListene
     private fun getBusinessNews() {
         presenter?.postsLiveData?.observe(this, Observer {
             adapter.submitList(it)
+            swipeRefresh.isRefreshing = false
         })
     }
 
-    override fun fillView(result: NewsModel?) {}
-
     override fun itemClicks(item: ArticleItem) {
-        startActivity(Intent(this, NewsArticleActivity::class.java))
+        val intent = Intent(this, NewsArticleActivity::class.java)
+        intent.putExtra(ARTICLE, item)
+        startActivity(intent)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         presenter?.unbind()
+    }
+
+    companion object {
+        const val ARTICLE = "ARTICLE"
     }
 }
